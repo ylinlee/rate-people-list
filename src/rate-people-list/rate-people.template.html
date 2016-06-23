@@ -1,0 +1,169 @@
+<style>
+.m-b-lg {
+    margin-bottom: 45px !important;
+}
+
+.m-b-0 {
+    margin-bottom: 0 !important;
+}
+
+.panel-profile .panel-heading {
+    height: 150px;
+    background-size: cover;
+}
+
+.panel-profile-img {
+    max-width: 100px;
+    margin-top: -70px;
+    margin-bottom: 5px;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.panel-profile .panel-title {
+    margin-bottom: 5px;
+}
+
+.template-index h5 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.m-b {
+    margin-bottom: 15px !important;
+}
+
+.btn-sm {
+    font-size: 12px;
+    padding: 5px 15px;
+}
+
+.panel {
+  height: inherit;
+}
+
+
+/* entire container, keeps perspective */
+
+.flip-container {
+    perspective: 1000px;
+}
+
+
+/* flip the pane when hovered */
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.flip-container,
+.front,
+.back {
+    width: 100%;
+    height: 320px;
+}
+
+
+/* flip speed goes here */
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+
+/* hide back of pane during swap */
+
+.front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* front pane, placed above back */
+
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+
+/* back, initially hidden pane */
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.back > div {
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    -webkit-transition: ease-out .3s;
+    -moz-transition: ease-out .3s;
+    -o-transition: ease-out .3s;
+    transition: ease-out .3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.back > div > a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.back > img{
+  width: 100%;
+  height:  100%;
+}
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper,
+.flip-container.flip .flipper {
+    transform: rotateY(180deg);
+}
+</style>
+<div class="container">
+    <div class="page-header">
+        <h2>Personajes</h2>
+    </div>
+    <div class="col-md-4 m-b-lg" ng-repeat="person in ratePeopleCtrl.people">
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <div class="front">
+                    <!-- front content -->
+                    <div class="panel panel-default panel-profile m-b-0">
+                        <div class="panel-heading" style="background-image: {{person.background}}"></div>
+                        <div class="panel-body text-center">
+                            <img class="panel-profile-img" ng-src="{{person.profileImg}}">
+                            <h5 class="panel-title">{{person.nick}}</h5>
+                            <p class="m-b">{{person.job}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="back">
+                    <!-- back content -->
+                    <img ng-src="{{ratePeopleCtrl.getBackContentImg()}}">
+                    <div>
+                        <a href="#/person/{{person._id}}" class="btn btn-primary btn-sm m-b">Valoraciones »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
