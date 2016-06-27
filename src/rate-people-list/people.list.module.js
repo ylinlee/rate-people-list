@@ -2,6 +2,6 @@
     'use strict';
 
   angular
-    .module('rateApp.rate-people.list',[
+    .module('rateApp.rate-people-list',[
     ]);
 })();

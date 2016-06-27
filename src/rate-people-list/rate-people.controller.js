@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-  angular.module('rateApp.rate-people.list')
+  angular.module('rateApp.rate-people-list')
     .controller('RatePeopleController', RatePeopleController);
 
   RatePeopleController.$inject = ['$scope', 'PeopleService', 'DataService', 'RateAssets'];
