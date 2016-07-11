@@ -12,9 +12,9 @@
   angular.module('rateApp.rate-people-list')
     .controller('RatePeopleController', RatePeopleController);
 
-  RatePeopleController.$inject = ['$scope', 'PeopleService', 'DataService', 'RateAssets'];
+  RatePeopleController.$inject = ['$scope', '$timeout', 'PeopleService', 'DataService', 'RateAssets'];
   
-  function RatePeopleController($scope, peopleService, dataService, RateAssetsProvider) {
+  function RatePeopleController($scope, $timeout, peopleService, dataService, RateAssetsProvider) {
     var vm = this;
     vm.people = [];
     vm.getBackContentImg = getBackContentImg;
@@ -26,7 +26,9 @@
     }
 
     function activate() {
-      $scope.$emit('startLoading', 'RatePeopleController');
+      $timeout(function() {
+        $scope.$emit('startLoading', 'RatePeopleController');
+      }, 1);
       return peopleService.getPeople().then(function(dataPeople){
         vm.people = dataPeople;
         if(!vm.people || vm.people.length === 0){
@@ -35,9 +37,10 @@
               $scope.$emit('endLoading', 'RatePeopleController');
               return vm.people;
           });
+        } else {
+          $scope.$emit('endLoading', 'RatePeopleController');
+          return vm.people;
         }
-        $scope.$emit('endLoading', 'RatePeopleController');
-        return vm.people;
       });
     }
 
